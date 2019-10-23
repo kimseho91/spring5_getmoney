@@ -13,8 +13,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@MapperScan(basePackages= {"com.hanrabong.web"})
-@ComponentScan(basePackages= {"com.hanrabong.web"})
+@MapperScan(basePackages= {"com.getmoney.web"})
+@ComponentScan(basePackages= {"com.getmoney.web"})
 public class RootConfig {
 	
 	@Bean

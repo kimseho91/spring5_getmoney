@@ -44,7 +44,7 @@ auth = (()=>{
                 			tier : $('tier').val()}
                 	alert('전송되는 데이터 : '+data.mid)
                     $.ajax({
-				    	url : _+'/customer/join',
+				    	url : _+'/customer/',
 				    	type : 'POST',
 				    	dataType : 'json',
 				    	data : JSON.stringify(data),
