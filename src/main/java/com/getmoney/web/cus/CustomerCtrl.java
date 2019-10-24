@@ -4,7 +4,11 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,15 +33,32 @@ public class CustomerCtrl {
 	
 	@PostMapping("/")
 	public String join(@RequestBody Customer param) {
-		logger.info("AJAX가 보낸 아이디와 비번{}",param.getMid() +", "
-					+param.getMpw()+", "+param.getMname());
-		IConsumer<String> c = t -> customerMapper.insertCustomer(param); 
+		IConsumer<Customer> c = t -> customerMapper.insertCustomer(param);
+		c.accept(param);
 		return "SUCCESS";
 	}
-	
-	@PostMapping("/login")
-	public Customer login(@RequestBody Customer param){
-		IFunction<Customer , Customer> f = t -> customerMapper.selectByIdPw(param);
-	       return f.apply(param);
-	    }
+
+	@PostMapping("/{mid}")
+	public Customer login(@PathVariable String mid, @RequestBody Customer param) {
+		IFunction<Customer, Customer> f = t -> customerMapper.selectByIdPw(param);
+		return f.apply(param);
+	}
+
+	@GetMapping("/{mid}")
+	public Customer searchCustomerById(@PathVariable String mid, @RequestBody Customer param) {
+		IFunction<Customer, Customer> f = t -> customerMapper.selectByIdPw(param);
+		return f.apply(param);
+	}
+
+	@PutMapping("/{mid}")
+	public String UpdateCustomer(@PathVariable String mid, @RequestBody Customer param) {
+		IConsumer<Customer> c = t -> customerMapper.insertCustomer(param);
+		return "SUCCESS";
+	}
+
+	@DeleteMapping("/{mid}")
+	public String removeCustomer(@PathVariable String mid, @RequestBody Customer param) {
+		IConsumer<Customer> c = t -> customerMapper.insertCustomer(param);
+		return "SUCCESS";
+	}
 }
