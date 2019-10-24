@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.getmoney.web.utl.Printer;
 import com.getmoney.web.cmm.IConsumer;
 import com.getmoney.web.cmm.IFunction;
+import com.getmoney.web.cmm.IPredicate;
 import com.getmoney.web.cus.Customer;
 import com.getmoney.web.cus.CustomerCtrl;
 import lombok.extern.log4j.Log4j;
@@ -28,6 +29,17 @@ public class CustomerCtrl {
 	@Autowired Customer customer;
 	@Autowired Printer printer;
 	@Autowired CustomerMapper customerMapper;
+	
+	@GetMapping("/{mid}/exist")
+	public Map<?,?> existId(@PathVariable String mid){
+		printer.accept("들어온 아이디 : "+mid);
+		IFunction<String , Integer> p = o -> customerMapper.existId(mid);
+		printer.accept("exist 들어옴 : " + p.apply(mid));
+		map.clear();
+		map.put("msg",(p.apply(mid) ==0) ? "SUCCESS" : "FAIL");
+		printer.accept("exist 들어옴 : " + map);
+		return map;
+	}
 	
 	@PostMapping("/")
 	public Map<?,?> join(@RequestBody Customer param) {
@@ -46,21 +58,26 @@ public class CustomerCtrl {
 		return f.apply(param);
 	}
 
-	@GetMapping("/{mid}")
+	/**@GetMapping("/{mid}")
 	public Customer searchCustomerById(@PathVariable String mid, @RequestBody Customer param) {
 		IFunction<Customer, Customer> f = t -> customerMapper.selectByIdPw(param);
 		return f.apply(param);
 	}
 
 	@PutMapping("/{mid}")
-	public String UpdateCustomer(@PathVariable String mid, @RequestBody Customer param) {
+	public Map<?,?> UpdateCustomer(@PathVariable String mid, @RequestBody Customer param) {
 		IConsumer<Customer> c = t -> customerMapper.insertCustomer(param);
-		return "SUCCESS";
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
 	}
 
 	@DeleteMapping("/{mid}")
-	public String removeCustomer(@PathVariable String mid, @RequestBody Customer param) {
+	public Map<?,?> removeCustomer(@PathVariable String mid, @RequestBody Customer param) {
 		IConsumer<Customer> c = t -> customerMapper.insertCustomer(param);
-		return "SUCCESS";
-	}
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
+	}*/
+	
 }

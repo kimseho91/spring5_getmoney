@@ -7,6 +7,7 @@ auth = (()=>{
         _ = $.ctx()
         js = $.js()
         auth_vue_js = js+'/vue/auth_vue.js'
+        brd_vue_js = js+'/vue/brd_vue.js'
     }
     let onCreate =()=>{
         init()
@@ -14,7 +15,21 @@ auth = (()=>{
         	setContentView()
     		$('#a_go_join').click(e=>{
          		e.preventDefault()
-         		join()
+	    	$.getScript(auth_vue_js)
+	        $('head')
+	        .html(auth_vue.join_head())
+	        $('body')
+	        .html(auth_vue.join_body())
+	            $('<button>',{
+	                text : '회원가입',
+	                href : '#',
+	                click : e=>{
+	                	e.preventDefault();
+	                	existId($('#mid').val())
+	                }
+	            })
+	            .addClass('btn btn-primary btn-lg btn-block')
+	            .appendTo('#btn_join')
     		})
         }).fail(()=>{alert(WHEN_ERR)})
     }
@@ -22,48 +37,34 @@ auth = (()=>{
     	 login()
     }
     let join =()=>{
-    	$.getScript(auth_vue_js)
-        $('head')
-        .html(auth_vue.join_head())
-        $('body')
-        .html(auth_vue.join_body())
-            $('<button>',{
-                text : '회원가입',
-                href : '#',
-                click : e=>{
-                	e.preventDefault();
-                	let data = {
-                			mid : $('#mid').val(), 
-                			mpw : $('#mpw').val(), 
-                			mname : $('#mname').val(),
-                			email : $('#email').val(),
-                			phonenum : $('#phonenum').val(),
-                			birth : $('#birth').val(),
-                			tooja : $('#tooja').val(),
-                			register_date : $('#register_date').val(),
-                			tier : $('#tier').val()}
-                	alert('전송되는 데이터 : '+data.mid)
-                    $.ajax({
-				    	url : _+'/cus/',
-				    	type : 'POST',
-				    	dataType : 'json',
-				    	data : JSON.stringify(data),
-				    	contentType : 'application/json',
-				    	success : d => {
-				    		alert('AJAX 성공 아이디: '+d.msg)
-				    		if(d.msg === 'SUCCESS')
-				    			login()
-				    		else
-				    			alert('회원가입 실패')
-				    	},
-				    	error : e => {
-				    		alert('AJAX 실패');
-				    	}
-                	})
-                }
-            })
-            .addClass('btn btn-primary btn-lg btn-block')
-            .appendTo('#btn_join')
+    	let data = {
+    			mid : $('#mid').val(), 
+    			mpw : $('#mpw').val(), 
+    			mname : $('#mname').val(),
+    			email : $('#email').val(),
+    			phonenum : $('#phonenum').val(),
+    			birth : $('#birth').val(),
+    			tooja : $('#tooja').val(),
+    			register_date : $('#register_date').val(),
+    			tier : $('#tier').val()}
+    		alert('전송되는 데이터 : '+data.mid)
+        $.ajax({
+	    	url : _+'/cus/',
+	    	type : 'POST',
+	    	dataType : 'json',
+	    	data : JSON.stringify(data),
+	    	contentType : 'application/json',
+	    	success : d => {
+	    		alert('AJAX 성공 아이디: '+d.msg)
+	    			if(d.msg === 'SUCCESS')
+	    				login()
+	    			else
+	    				alert('회원가입 실패')
+	    	},
+	    	error : e => {
+	    		alert('AJAX 실패');
+	    	}
+    	})
     }
     let login =()=>{
     	let x = {css: $.css(), img: $.img()}
@@ -87,7 +88,7 @@ auth = (()=>{
           contentType : 'application/json',
           success : d =>{
             alert(d.mname+' 님 환영합니다')
-            mypage(d)
+            	brd_home()
           },
           error : e => {
 	    	alert('Loign AJAX 실패');
@@ -113,5 +114,28 @@ auth = (()=>{
     	$('head').html(auth_vue.mypage_head(x))
         $('body').html(auth_vue.mypage_body(x))
     }
-    return {onCreate, join, login, mypage}
+    let existId = x=>{
+    	
+    	$.ajax({
+    		url : _+'/cus/'+x+'/exist',
+	    	type : 'GET',
+	    	contentType : 'application/json',
+	    	success : d => {
+	    			if(d.msg === 'SUCCESS'){
+	    				alert('가입 가능 아이디 입니다.')
+	    				join()
+	    			}else{
+	    				alert('이미 존재하는 아이디 입니다.')
+    				}
+	    	}
+    	})
+    }
+    let brd_home =()=>{
+    		$.getScript(brd_vue_js).done(()=>{
+    		$('head').html(brd_vue.brd_head)      
+    	    $('body').html(brd_vue.brd_body)
+    	    })
+    	    .fail(()=>{alert(WHEN_ERR)})
+    }
+    return {onCreate, join, login, mypage, brd_home}
 })();
