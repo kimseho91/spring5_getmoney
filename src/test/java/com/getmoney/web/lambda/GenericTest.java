@@ -1,6 +1,6 @@
 package com.getmoney.web.lambda;
 
-import com.getmoney.web.customer.Customer;
+import com.getmoney.web.cus.Customer;
 
 public class GenericTest {
 	static class Box<T>{

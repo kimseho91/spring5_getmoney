@@ -1,4 +1,4 @@
-package com.getmoney.web.customer;
+package com.getmoney.web.cus;
 
 import java.util.Map;
 import org.slf4j.Logger;
@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.getmoney.web.customer.CustomerCtrl;
+
 import com.getmoney.web.utl.Printer;
 import com.getmoney.web.cmm.IConsumer;
 import com.getmoney.web.cmm.IFunction;
-import com.getmoney.web.customer.Customer;
+import com.getmoney.web.cus.Customer;
+import com.getmoney.web.cus.CustomerCtrl;
+
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/cus")
 @Log4j
 public class CustomerCtrl {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerCtrl.class);

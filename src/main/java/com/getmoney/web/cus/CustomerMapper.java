@@ -1,4 +1,4 @@
-package com.getmoney.web.customer;
+package com.getmoney.web.cus;
 
 import org.springframework.stereotype.Repository;
 

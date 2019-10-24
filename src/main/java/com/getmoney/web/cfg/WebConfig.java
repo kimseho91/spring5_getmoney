@@ -1,9 +1,10 @@
-package com.getmoney.web.config;
+package com.getmoney.web.cfg;
 
 import org.springframework.web.servlet.support.
 AbstractAnnotationConfigDispatcherServletInitializer;
-import com.getmoney.web.config.RootConfig;
-import com.getmoney.web.config.ServletConfig;
+
+import com.getmoney.web.cfg.RootConfig;
+import com.getmoney.web.cfg.ServletConfig;
 
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer{
 

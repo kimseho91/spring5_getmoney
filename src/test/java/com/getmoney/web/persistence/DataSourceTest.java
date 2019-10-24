@@ -6,7 +6,9 @@ import javax.sql.DataSource;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import com.getmoney.web.config.RootConfig;
+
+import com.getmoney.web.cfg.RootConfig;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 

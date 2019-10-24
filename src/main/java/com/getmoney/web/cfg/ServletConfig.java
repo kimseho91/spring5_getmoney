@@ -1,4 +1,4 @@
-package com.getmoney.web.config;
+package com.getmoney.web.cfg;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
