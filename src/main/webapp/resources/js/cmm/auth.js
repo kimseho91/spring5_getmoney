@@ -50,8 +50,11 @@ auth = (()=>{
 				    	data : JSON.stringify(data),
 				    	contentType : 'application/json',
 				    	success : d => {
-				    		alert('AJAX 성공 아이디: '+d.mid+', 성공비번: '+d.mpw)
-				    		login()
+				    		alert('AJAX 성공 아이디: '+d.msg)
+				    		if(d.msg === 'SUCCESS')
+				    			login()
+				    		else
+				    			alert('회원가입 실패')
 				    	},
 				    	error : e => {
 				    		alert('AJAX 실패');

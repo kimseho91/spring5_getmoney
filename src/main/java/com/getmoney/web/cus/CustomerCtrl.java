@@ -30,13 +30,14 @@ public class CustomerCtrl {
 	@Autowired CustomerMapper customerMapper;
 	
 	@PostMapping("/")
-	public Customer join(@RequestBody Customer param) {
+	public Map<?,?> join(@RequestBody Customer param) {
 		printer.accept("컨슈머 전 : "+param.toString());
 		IConsumer<Customer> c = t -> customerMapper.insertCustomer(param);
 		c.accept(param);
 		printer.accept("컨슈머 후 : "+param.toString());
-		IFunction<Customer, Customer> f = t -> customerMapper.selectByIdPw(param);
-		return f.apply(param);
+		map.clear();
+		map.put("msg", "SUCCESS");
+		return map;
 	}
 
 	@PostMapping("/{mid}")
