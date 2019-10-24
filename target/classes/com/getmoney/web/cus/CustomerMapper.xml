@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.getmoney.web.cus.CustomerMapper">
+    <select id="selectByIdPw" resultType="Customer">
+        select * 
+        from customer 
+        where mid like #{mid} 
+        and mpw like #{mpw}
+    </select>
+    <insert id="insertCustomer" parameterType="com.getmoney.web.cus.Customer">
+        insert into customer (mid, mpw, mname, email, phonenum, birth, tooja, register_date, tier) 
+        values (#{mid}, #{mpw}, #{mname}, #{email}, #{phonenum}, #{birth}, #{tooja}, #{register_date}, #{tier})
+    </insert>
+</mapper>

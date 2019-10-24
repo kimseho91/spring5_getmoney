@@ -44,7 +44,7 @@ auth = (()=>{
                 			tier : $('tier').val()}
                 	alert('전송되는 데이터 : '+data.mid)
                     $.ajax({
-				    	url : _+'/customer/',
+				    	url : _+'/cus/',
 				    	type : 'POST',
 				    	dataType : 'json',
 				    	data : JSON.stringify(data),
@@ -78,7 +78,7 @@ auth = (()=>{
         		let data = {mid : $('#loginid').val(), mpw : $('#loginpw').val()}
         $.ajax({
         	
-          url : _+'/customer/login',
+          url : _+'/cus/login',
           type : 'POST',
           data : JSON.stringify(data),
           dataType : 'json',
