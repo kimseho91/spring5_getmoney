@@ -28,7 +28,7 @@ auth = (()=>{
         $('body')
         .html(auth_vue.join_body())
             $('<button>',{
-                text : 'Continue to checkout',
+                text : '회원가입',
                 href : '#',
                 click : e=>{
                 	e.preventDefault();
@@ -36,12 +36,12 @@ auth = (()=>{
                 			mid : $('#mid').val(), 
                 			mpw : $('#mpw').val(), 
                 			mname : $('#mname').val(),
-                			email : $('email').val(),
-                			phonenum : $('phonenum').val(),
-                			birth : $('birth').val(),
-                			tooja : $('tooja').val(),
-                			register_date : $('register_date').val(),
-                			tier : $('tier').val()}
+                			email : $('#email').val(),
+                			phonenum : $('#phonenum').val(),
+                			birth : $('#birth').val(),
+                			tooja : $('#tooja').val(),
+                			register_date : $('#register_date').val(),
+                			tier : $('#tier').val()}
                 	alert('전송되는 데이터 : '+data.mid)
                     $.ajax({
 				    	url : _+'/cus/',
@@ -57,7 +57,6 @@ auth = (()=>{
 				    		alert('AJAX 실패');
 				    	}
                 	})
-                    
                 }
             })
             .addClass('btn btn-primary btn-lg btn-block')

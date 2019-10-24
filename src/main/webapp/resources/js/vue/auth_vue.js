@@ -180,7 +180,7 @@ auth_vue = {
 		'          </div>'+
 		'          <div class="col-md-3 mb-3">'+
 		'            <label for="zip">TIER</label>'+
-		            '<input type="text" class="form-control" id="zip" placeholder="" required="">'+
+		            '<input type="text" class="form-control" id="tier" placeholder="" required="">'+
 		'            <div class="invalid-feedback">'+
 		'              Zip code required.'+
 		'            </div>'+

@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.getmoney.web.utl.Printer;
 import com.getmoney.web.cmm.IConsumer;
 import com.getmoney.web.cmm.IFunction;
 import com.getmoney.web.cus.Customer;
 import com.getmoney.web.cus.CustomerCtrl;
-
 import lombok.extern.log4j.Log4j;
 
 @RestController
@@ -32,10 +30,13 @@ public class CustomerCtrl {
 	@Autowired CustomerMapper customerMapper;
 	
 	@PostMapping("/")
-	public String join(@RequestBody Customer param) {
+	public Customer join(@RequestBody Customer param) {
+		printer.accept("컨슈머 전 : "+param.toString());
 		IConsumer<Customer> c = t -> customerMapper.insertCustomer(param);
 		c.accept(param);
-		return "SUCCESS";
+		printer.accept("컨슈머 후 : "+param.toString());
+		IFunction<Customer, Customer> f = t -> customerMapper.selectByIdPw(param);
+		return f.apply(param);
 	}
 
 	@PostMapping("/{mid}")
