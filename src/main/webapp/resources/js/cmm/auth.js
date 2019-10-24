@@ -2,7 +2,7 @@
 var auth = auth || {}
 auth = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-    let _, js, auth_vue_js
+    let _, js, auth_vue_js, brd_vue_js
     let init = ()=>{
         _ = $.ctx()
         js = $.js()
@@ -60,6 +60,7 @@ auth = (()=>{
 	    				login()
 	    			else
 	    				alert('회원가입 실패')
+	    		
 	    	},
 	    	error : e => {
 	    		alert('AJAX 실패');
@@ -115,7 +116,6 @@ auth = (()=>{
         $('body').html(auth_vue.mypage_body(x))
     }
     let existId = x=>{
-    	
     	$.ajax({
     		url : _+'/cus/'+x+'/exist',
 	    	type : 'GET',
@@ -130,12 +130,13 @@ auth = (()=>{
 	    	}
     	})
     }
-    let brd_home =()=>{
-    		$.getScript(brd_vue_js).done(()=>{
-    		$('head').html(brd_vue.brd_head)      
-    	    $('body').html(brd_vue.brd_body)
-    	    })
-    	    .fail(()=>{alert(WHEN_ERR)})
+    let brd_home = ()=>{
+    	$.getScript(brd_vue_js).done(()=>{
+    		$('head').html(brd_vue.brd_head())
+        	$('body')
+        	.addClass('text-center')
+        	.html(brd_vue.brd_body())	
+    	})
     }
-    return {onCreate, join, login, mypage, brd_home}
+    return {onCreate, join, login,brd_home}
 })();
