@@ -27,6 +27,22 @@ brd = (()=>{
         $('body')
         .addClass('text-center')
         .html(brd_vue.brd_body())
+        $('#recent_updates .media').remove()
+        $('#recent_updates .d-block').remove()
+        $('#recent_updates').append('<h1>등록된 글이 없습니다.</h1>')
+        $('<a>',{
+        	href : '#',
+        	click : e=>{
+        		e.preventDefault()
+        		write()
+        	},
+        	text : '글쓰기'
+        })
+        .addClass('nav-link')
+        .appendTo('#ago_write')
+	}
+	let write=()=>{
+		alert('글쓰기로 이동')
 	}
 	return {onCreate}
 })()
