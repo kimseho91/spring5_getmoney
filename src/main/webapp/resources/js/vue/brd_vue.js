@@ -17,11 +17,11 @@ brd_vue = {
 	' <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'+
 	'  </head>'
 	},
-	brd_body: ()=>{
+	brd_body: x=>{
 		return '<body class="bg-light">'+
         '    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">'+
         '  <a class="navbar-brand mr-auto mr-lg-0" href="#">'+
-        '<i class="far fa-grin-wink fa-3x"></i>'+
+        '<i class="far fa-grin-wink fa-2x"></i>'+
         '</a>'+
         '  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">'+
         '    <span class="navbar-toggler-icon"></span>'+
@@ -79,7 +79,7 @@ brd_vue = {
         '    </div>'+
         '  </div>'+
         '  <div class="my-3 p-3 bg-white rounded shadow-sm">'+
-        '    <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>'+
+        '    <h6 class="border-bottom border-gray pb-2 mb-0">'+x.mname+'님의 글</h6>'+
         '    <div class="media text-muted pt-3">'+
         '      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">'+
         '        <strong class="d-block text-gray-dark" id="recent_updates"></strong>'+
@@ -88,7 +88,7 @@ brd_vue = {
         '      <a href="#">All updates</a>'+
         '    </small>'+
         '  </div> '+
-        '  <div class="my-3 p-3 bg-white rounded shadow-sm">'+
+        '  <div id="suggestions" class="my-3 p-3 bg-white rounded shadow-sm">'+
         '    <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>'+
         '    <div class="media text-muted pt-3">'+
               '<svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"></rect><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>'+
@@ -129,5 +129,23 @@ brd_vue = {
               '<script src="https://getbootstrap.com/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>'+
         '        <script src="https://getbootstrap.com/docs/4.3/examples/offcanvas/offcanvas.js"></script>'+
         '</body>'
+	},
+	brd_write: x=>{
+		  return '<div class="container-fluid" style="width:80%">'
+		  +'<h1>ARTICLE WRITING</h1>'
+		  +'<form>'
+		  +'<input type="text" name="writer" style="margin-top:20px" class="form-control" placeholder="'+x.mid+'"/>'
+		  +'<input type="text" name="title" style="margin-top:20px" class="form-control" placeholder="제목" /><br />'
+		  +'<div class="row">'
+		  +'<div style="width:97%; margin:10px auto" >'
+		  +'<textarea name="content" class="form-control" rows="10" id="comment"></textarea>'
+		  +' </div>'
+		  +' </div>'
+		  +' <input type="reset" class="btn btn-danger" style="float:right;width:100px;margin-right:10px" value="CANCEL"/>'
+		  +'<input name="write" type="submit" class="btn btn-primary" style="float:right;width:100px;margin-right:10px" value="SUBMIT"/>'
+		  +'<input type="hidden" name="action" value="write"/>'
+		  +'<input type="hidden" name="pageName" value="detail" />'
+		  +'</form>'
+		  +'</div>'
 	}
 };

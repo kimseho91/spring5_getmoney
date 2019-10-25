@@ -2,17 +2,23 @@
 var auth = auth || {}
 auth = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-    let _, js, auth_vue_js, brd_vue_js, brdjs
+    let _, js, auth_vue_js, brd_vue_js, brdjs, router_js
     let init = ()=>{
         _ = $.ctx()
         js = $.js()
         auth_vue_js = js+'/vue/auth_vue.js'
         brd_vue_js = js+'/vue/brd_vue.js'
         brdjs = js+'/brd/brd.js'
+        router_js = js+'/cmm/router.js'
     }
+    let a
     let onCreate =()=>{
         init()
-        $.getScript(auth_vue_js).done(()=>{
+        $.when(
+			$.getScript(auth_vue_js),
+			$.getScript(router_js)
+		)		
+        .done(()=>{
         	setContentView()
     		$('#a_go_join').click(e=>{
          		e.preventDefault()
@@ -113,9 +119,14 @@ auth = (()=>{
           dataType : 'json',
           contentType : 'application/json',
           success : d =>{
-            	$.getScript(brdjs, ()=>{
-            		brd.onCreate()
-            	})
+        	  $.when(
+        		$.getScript(router_js),
+        		$.getScript(brdjs)
+        	  )
+        	  .done(()=>{
+        		  $.extend(new Customer(d))
+        		  brd.onCreate(d)
+        	  })
             	alert(d.mname+' 님 환영합니다')
           },
           error : e => {
@@ -126,21 +137,6 @@ auth = (()=>{
         })
         .addClass("btn btn-lg btn-primary btn-block")
         .appendTo('#btn_login')
-    }
-    let mypage =(d)=>{
-    	let x = {
-    			mid : d.mid,
-    			mpw : d.mpw,
-    			mname : d.mname,
-    			email : d.email,
-    			phonenum : d.phonenum,
-    			birth : d.birth,
-    			tooja : d.tooja,
-    			register_date : d.register_date,
-    			tier : d.tier
-    	}
-    	$('head').html(auth_vue.mypage_head(x))
-        $('body').html(auth_vue.mypage_body(x))
     }
     let existId = x=>{
     	$.ajax({
