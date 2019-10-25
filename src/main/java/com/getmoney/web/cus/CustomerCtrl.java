@@ -52,7 +52,7 @@ public class CustomerCtrl {
 		return map;
 	}
 
-	@PostMapping("/{mid}")
+	@PostMapping("/{mid}/login")
 	public Customer login(@PathVariable String mid, @RequestBody Customer param) {
 		IFunction<Customer, Customer> f = t -> customerMapper.selectByIdPw(param);
 		return f.apply(param);

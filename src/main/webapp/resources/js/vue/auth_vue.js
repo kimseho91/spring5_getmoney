@@ -104,27 +104,33 @@ auth_vue = {
 		'      </form>'+
 		'    </div>'+
 		'    <div class="col-md-8 order-md-1">'+
-		'      <h4 class="mb-3">Billing address</h4>'+
+		'      <h4 class="mb-3">회원가입</h4>'+
 		'      <form class="needs-validation" novalidate="">'+
 		'        <div class="row">'+
 		'          <div class="col-md-6 mb-3">'+
-		'            <label for="mid">CUSOTMERID</label>'+
+		'            <label for="mid">아이디</label>'+
         '				<input type="text" class="form-control" id="mid" placeholder="" value="" required="">'+
 		'            <div class="invalid-feedback">'+
 		'              Valid first name is required.'+
 		'            </div>'+
 		'          </div>'+
 		'          <div class="col-md-6 mb-3">'+
-		'            <label for="mpw">PASSWORD</label>'+
+		'            <label for="mpw">비밀번호</label>'+
 		            '<input type="text" class="form-control" id="mpw" placeholder="" value="" required="">'+
 		'            <div class="invalid-feedback">'+
 		'              Valid last name is required.'+
 		'            </div>'+
 		'          </div>'+
 		'        </div>'+
-
+		'		<div class="col-md-6 mb-3">'+
+		'            <label for="dupl_check">아이디 중복체크</label>'+
+        '			 <input type="text" class="form-control" id="dupl_check" placeholder="" value="" required="">'+
+        '       		<div class="invalid-feedback">'+
+        '     			 Valid last name is required.'+
+        '   		</div>'+
+        '  		</div>'+
 		'        <div class="mb-3">'+
-		'          <label for="mname">Customername</label>'+
+		'          <label for="mname">이름</label>'+
 		'          <div class="input-group">'+
 		'            <div class="input-group-prepend">'+
 		'              <span class="input-group-text">@</span>'+
@@ -137,7 +143,7 @@ auth_vue = {
 		'        </div>'+
 
 		'        <div class="mb-3">'+
-		          '<label for="email">Email<span class="text-muted">(Optional)</span></label>'+
+		          '<label for="email">이메일<span class="text-muted">(Optional)</span></label>'+
 		          '<input type="email" class="form-control" id="email" placeholder="you@example.com">'+
 		'          <div class="invalid-feedback">'+
 		'            Please enter a valid email address for shipping updates.'+
@@ -145,7 +151,7 @@ auth_vue = {
 		'        </div>'+
 
 		'        <div class="mb-3">'+
-		'          <label for="phonenum">PHONENUM</label>'+
+		'          <label for="phonenum">전화번호</label>'+
 		          '<input type="text" class="form-control" id="phonenum" placeholder="1234 Main St" required="">'+
 		'          <div class="invalid-feedback">'+
 		'            Please enter your shipping address.'+
@@ -153,36 +159,36 @@ auth_vue = {
 		'        </div>'+
 
 		'        <div class="mb-3">'+
-		          '<label for="birth">BIRTH <span class="text-muted">(Optional)</span></label>'+
+		          '<label for="birth">생년월일 <span class="text-muted">(Optional)</span></label>'+
 		          '<input type="text" class="form-control" id="birth" placeholder="Apartment or suite">'+
 		'        </div>'+
 
 		'        <div class="row">'+
 		'          <div class="col-md-5 mb-3">'+
-		'            <label for="tooja">TOOJA </label>'+
+		'            <label for="tooja">투자성향 </label>'+
 		'            <input type="text" class="form-control" id="tooja" placeholder="" value="" required="">'+
 		'              <option value="">Choose...</option>'+
 		'              <option>United States</option>'+
-		'            </select>'+
 		'            <div class="invalid-feedback">'+
 		'              Please select a valid country.'+
 		'            </div>'+
 		'          </div>'+
 		'          <div class="col-md-4 mb-3">'+
-		'            <label for="register_date">REGISTER_DATE </label>'+
+		'            <label for="register_date">가입일 </label>'+
 		'            <input type="text" class="form-control" id="register_date" placeholder="" value="" required="">'+
 		'              <option value="">Choose...</option>'+
 		'              <option>California</option>'+
-		'            </select>'+
 		'            <div class="invalid-feedback">'+
 		'              Please provide a valid state.'+
 		'            </div>'+
 		'          </div>'+
-		'          <div class="col-md-3 mb-3">'+
-		'            <label for="zip">TIER</label>'+
-		            '<input type="text" class="form-control" id="tier" placeholder="" required="">'+
+		'		  <div class="col-md-5 mb-3">'+
+		'            <label for="tier">티어 </label>'+
+		'            <input type="text" class="form-control" id="tier" placeholder="" value="" required="">'+
+		'              <option value="">Choose...</option>'+
+		'              <option>United States</option>'+
 		'            <div class="invalid-feedback">'+
-		'              Zip code required.'+
+		'              Please select a valid country.'+
 		'            </div>'+
 		'          </div>'+
 		'        </div>'+
