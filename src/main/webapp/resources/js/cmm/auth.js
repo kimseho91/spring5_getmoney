@@ -2,12 +2,13 @@
 var auth = auth || {}
 auth = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-    let _, js, auth_vue_js, brd_vue_js
+    let _, js, auth_vue_js, brd_vue_js, brdjs
     let init = ()=>{
         _ = $.ctx()
         js = $.js()
         auth_vue_js = js+'/vue/auth_vue.js'
         brd_vue_js = js+'/vue/brd_vue.js'
+        brdjs = js+'/brd/brd.js'
     }
     let onCreate =()=>{
         init()
@@ -112,8 +113,10 @@ auth = (()=>{
           dataType : 'json',
           contentType : 'application/json',
           success : d =>{
-            alert(d.mname+' 님 환영합니다')
-            	brd_home()
+            	$.getScript(brdjs, ()=>{
+            		brd.onCreate()
+            	})
+            	alert(d.mname+' 님 환영합니다')
           },
           error : e => {
 	    	alert('Loign AJAX 실패');
@@ -154,13 +157,5 @@ auth = (()=>{
 	    	}
     	})
     }
-    let brd_home = ()=>{
-    	$.getScript(brd_vue_js).done(()=>{
-    		$('head').html(brd_vue.brd_head())
-        	$('body')
-        	.addClass('text-center')
-        	.html(brd_vue.brd_body())	
-    	})
-    }
-    return {onCreate, join, login, brd_home}
+    return {onCreate, join, login}
 })();
