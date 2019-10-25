@@ -17,7 +17,7 @@ brd_vue = {
 	' <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">'+
 	'  </head>'
 	},
-	brd_body: x=>{
+	brd_body: ()=>{
 		return '<body class="bg-light">'+
         '    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">'+
         '  <a class="navbar-brand mr-auto mr-lg-0" href="#">'+
@@ -79,7 +79,7 @@ brd_vue = {
         '    </div>'+
         '  </div>'+
         '  <div class="my-3 p-3 bg-white rounded shadow-sm">'+
-        '    <h6 class="border-bottom border-gray pb-2 mb-0">'+x.mname+'님의 글</h6>'+
+        '    <h6 class="border-bottom border-gray pb-2 mb-0"></h6>'+
         '    <div class="media text-muted pt-3">'+
         '      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">'+
         '        <strong class="d-block text-gray-dark" id="recent_updates"></strong>'+
@@ -130,11 +130,11 @@ brd_vue = {
         '        <script src="https://getbootstrap.com/docs/4.3/examples/offcanvas/offcanvas.js"></script>'+
         '</body>'
 	},
-	brd_write: x=>{
+	brd_write: ()=>{
 		  return '<div class="container-fluid" style="width:80%">'
 		  +'<h1>ARTICLE WRITING</h1>'
 		  +'<form>'
-		  +'<input type="text" name="writer" style="margin-top:20px" class="form-control" placeholder="'+x.mid+'"/>'
+		  +'<input id="write_name" type="text" name="writer" style="margin-top:20px" class="form-control" placeholder=""/>'
 		  +'<input type="text" name="title" style="margin-top:20px" class="form-control" placeholder="제목" /><br />'
 		  +'<div class="row">'
 		  +'<div style="width:97%; margin:10px auto" >'

@@ -110,24 +110,26 @@ auth = (()=>{
         	text : "로그인",
         	click : e => {
         		e.preventDefault()
-        let data = {mid : $('#loginid').val(), mpw : $('#loginpw').val()}
         $.ajax({
         	
           url : _+'/cus/'+$('#mid').val()+'/login',
           type : 'POST',
-          data : JSON.stringify(data),
+          data : JSON.stringify({
+        	  mid : $('#loginid').val(), 
+      		  mpw : $('#loginpw').val()
+          }),
           dataType : 'json',
           contentType : 'application/json',
           success : d =>{
         	  $.when(
-        		$.getScript(router_js),
-        		$.getScript(brdjs)
+        		$.getScript(brdjs),
+        		$.getScript(router_js)
         	  )
         	  .done(()=>{
-        		  $.extend(new Customer(d))
-        		  brd.onCreate(d)
+        		  $.extend(new CusData(d))
+        		  alert('환영 합니다.'+$.smid()+$.smname())
+        		  brd.onCreate()
         	  })
-            	alert(d.mname+' 님 환영합니다')
           },
           error : e => {
 	    	alert('Loign AJAX 실패');

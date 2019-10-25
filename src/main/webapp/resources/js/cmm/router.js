@@ -11,11 +11,13 @@ function Session(x){
 		img : ()=>{return sessionStorage.getItem('img');}
 	}
 }
-function Customer(t) {
-	sessionStorage.setItem('mid',t.mid);
-	sessionStorage.setItem('mname',t.mname);
+function CusData(x){
+	sessionStorage.setItem('smid', x.mid)
+	sessionStorage.setItem('smpw', x.mpw)
+	sessionStorage.setItem('smname', x.mname)
 	return{
-		mid : ()=>{return sessionStorage.getItem('mid');},
-		mname : ()=>{return sessionStorage.getItem('mname');}
+		smid : ()=>{return sessionStorage.getItem('smid')},
+		smpw : ()=>{return sessionStorage.getItem('smpw')},
+		smname : ()=>{return sessionStorage.getItem('smname')}
 	}
 }
