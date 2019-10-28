@@ -22,7 +22,6 @@ import lombok.extern.log4j.Log4j;
 
 @RestController
 @RequestMapping("/cus")
-@Log4j
 public class CustomerCtrl {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerCtrl.class);
 	@Autowired Map<String , Object> map;

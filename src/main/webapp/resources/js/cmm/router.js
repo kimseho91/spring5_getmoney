@@ -16,8 +16,8 @@ function CusData(x){
 	sessionStorage.setItem('smpw', x.mpw)
 	sessionStorage.setItem('smname', x.mname)
 	return{
-		smid : ()=>{return sessionStorage.getItem('smid')},
-		smpw : ()=>{return sessionStorage.getItem('smpw')},
-		smname : ()=>{return sessionStorage.getItem('smname')}
+		smid : ()=>{return sessionStorage.getItem('smid');},
+		smpw : ()=>{return sessionStorage.getItem('smpw');},
+		smname : ()=>{return sessionStorage.getItem('smname');}
 	}
 }

@@ -80,7 +80,7 @@ auth = (()=>{
     			tooja : $('#tooja').val(),
     			register_date : $('#register_date').val(),
     			tier : $('#tier').val()}
-    		alert('전송되는 데이터 : '+data.mid)
+    			alert('전송되는 데이터 : '+data.mid)
         $.ajax({
 	    	url : _+'/cus/',
 	    	type : 'POST',
@@ -127,7 +127,6 @@ auth = (()=>{
         	  )
         	  .done(()=>{
         		  $.extend(new CusData(d))
-        		  alert('환영 합니다.'+$.smid()+$.smname())
         		  brd.onCreate()
         	  })
           },
