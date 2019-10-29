@@ -106,6 +106,8 @@ auth = (()=>{
         $('body')
         .addClass('text-center')
         .html(auth_vue.login_body())
+        $('#loginid').val('hong')
+        $('#loginpw').val('hong1234')
         $('<button>',{
         	text : "로그인",
         	click : e => {

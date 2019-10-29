@@ -78,11 +78,11 @@ brd_vue = {
         '      <small>2019-10-25</small>'+
         '    </div>'+
         '  </div>'+
-        '  <div class="my-3 p-3 bg-white rounded shadow-sm">'+
+        '  <div id="recent_updates" class="my-3 p-3 bg-white rounded shadow-sm">'+
         '    <h6 class="border-bottom border-gray pb-2 mb-0"></h6>'+
         '    <div class="media text-muted pt-3">'+
         '      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">'+
-        '        <strong class="d-block text-gray-dark" id="recent_updates"></strong>'+
+        '        <strong class="d-block text-gray-dark"></strong>'+
         '      </p>'+
             '    <small class="d-block text-right mt-3">'+
         '      <a href="#">All updates</a>'+
@@ -134,6 +134,7 @@ brd_vue = {
 		return '<div class="container-fluid" style="width:80%">'
 		  +'<h1>ARTICLE WRITING</h1>'
 		  +'<form id="write_form">'
+		  +'<input type="text" name="artseq" style="margin-top:20px" class="form-control">'
 		  +'<input type="text" name="writer" style="margin-top:20px" class="form-control" placeholder="작성자 ID" />'
 		  +'<input type="text" name="title" style="margin-top:20px" class="form-control" placeholder="제목" /><br />'
 		  +'<div class="row">'

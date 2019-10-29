@@ -8,4 +8,25 @@
   		insert into article (mid, brdtype, title, content)
   		values (#{mid}, #{brdtype}, #{title}, #{content})
   	</insert>
+  	<select id="readArticle" resultType="Article">
+        select * 
+        from article 
+        where mid like #{mid} 
+    </select>
+    <select id="countArticle" resultType="string">
+    	select count(*)
+		from article
+    </select>
+    <select id="selectAll" resultType="Article">
+    	select * from article
+    </select>
+    <update id="updateArticle" parameterType="Article">
+    	update article
+		set title = #{title}, content = #{content}
+		where artseq = #{artseq}
+    </update>
+    <delete id="deleteArticle" parameterType="Article">
+    	delete from article
+		where artseq = #{artseq}
+    </delete>
   </mapper>
