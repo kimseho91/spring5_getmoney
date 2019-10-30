@@ -2,21 +2,25 @@
 var auth = auth || {}
 auth = (()=>{
 	const WHEN_ERR = '호출하는 JS 파일을 찾지 못했습니다.'
-    let _, js, auth_vue_js, brd_vue_js, brdjs, router_js
+    let _, js, css, img, auth_vue_js, brd_vue_js, brd_js, router_js, cookie_js
     let init = ()=>{
-        _ = $.ctx()
-        js = $.js()
+    	_ = $.ctx()
+		js = $.js()
+		css = $.css()
+		img = $.img()
         auth_vue_js = js+'/vue/auth_vue.js'
         brd_vue_js = js+'/vue/brd_vue.js'
-        brdjs = js+'/brd/brd.js'
+        brd_js = js+'/brd/brd.js'
         router_js = js+'/cmm/router.js'
+        cookie_js = js+'/cmm/cookie.js'
     }
-    let a
     let onCreate =()=>{
         init()
         $.when(
 			$.getScript(auth_vue_js),
-			$.getScript(router_js)
+			$.getScript(router_js),
+			$.getScript(brd_js),
+			$.getScript(cookie_js)
 		)		
         .done(()=>{
         	setContentView()
@@ -61,7 +65,6 @@ auth = (()=>{
         }).fail(()=>{alert(WHEN_ERR)})
     }
     let setContentView =()=>{
-    	let x = {css: $.css(), img: $.img()}
 		$('head')
         .html(auth_vue.login_head())
         $('body')
@@ -100,7 +103,6 @@ auth = (()=>{
     	})
     }
     let login =()=>{
-    	let x = {css: $.css(), img: $.img()}
 		$('head')
         .html(auth_vue.login_head())
         $('body')
@@ -123,18 +125,13 @@ auth = (()=>{
           dataType : 'json',
           contentType : 'application/json',
           success : d =>{
-        	  $.when(
-        		$.getScript(brdjs),
-        		$.getScript(router_js)
-        	  )
-        	  .done(()=>{
-        		  $.extend(new CusData(d))
-        		  brd.onCreate()
-        	  })
+        	  setCookie("CUSID",d.mid)
+        	  alert('저장된 쿠키: '+getCookie("CUSID"))
+        	  brd.onCreate()
           },
-          error : e => {
-	    	alert('Loign AJAX 실패');
-          }
+			error: e =>{
+				alert('AJAX ERROR ')
+			}
         })	
         	}
         })

@@ -20,6 +20,11 @@
     <select id="selectAll" resultType="Article">
     	select * from article
     </select>
+    <select id="selectMypage" resultType="Article">
+    	select *
+		from article
+		where mid like #{mid}
+    </select>
     <update id="updateArticle" parameterType="Article">
     	update article
 		set title = #{title}, content = #{content}

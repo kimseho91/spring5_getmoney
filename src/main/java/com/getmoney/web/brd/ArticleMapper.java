@@ -12,4 +12,5 @@ public interface ArticleMapper {
 	public List<Article> selectAll();
 	public void updateArticle(Article param);
 	public void deleteArticle(Article param);
+	public List<Article> selectMypage();
 }

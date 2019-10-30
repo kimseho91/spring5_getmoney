@@ -31,6 +31,7 @@ public class ArticleCtrl {
 	@PostMapping("/")
 	public Map<?,?> write(@RequestBody Article param){
 		param.setBrdtype("게시판");
+		printer.accept("글쓰기 들어옴 : "+param.toString());
 		IConsumer<Article> c = t -> articleMapper.insertArticle(param);
 			c.accept(param);
 		map.clear();
@@ -39,13 +40,23 @@ public class ArticleCtrl {
 		map.put("count", s.get());
 		return map;
 	}
+	
 	@GetMapping("/")
 	public List<Article> list(){
 		list.clear();
 		ISupplier<List<Article>> s = ()-> articleMapper.selectAll();
-		printer.accept("리스트 들어옴 : \n"+s.get());
+		printer.accept("리스트 나감 : \n"+s.get());
 		return s.get();
 	}
+	
+	/**@GetMapping("/{mid}")
+	public List<Article> mylist(@PathVariable String mid){
+		printer.accept("마이리스트 들어옴" +mid);
+		list.clear();
+		ISupplier<List<Article>> s = ()-> articleMapper.selectMypage();
+		printer.accept("마이리스트 나감 : \n"+s.get());
+		return s.get();
+	}*/
 	
 	@GetMapping("/count")
 	public Map<?,?> count(){
@@ -56,10 +67,10 @@ public class ArticleCtrl {
 		return map;
 	}
 	
-	@GetMapping("/{artseq}")
+	/**@GetMapping("/{artseq}")
 	public Article readArticle(@PathVariable String artseq, @RequestBody Article param){
 		return null;
-	}
+	}*/
 	
 	@PutMapping("/{artseq}")
 	public Article update(@PathVariable String artseq, @RequestBody Article param){
