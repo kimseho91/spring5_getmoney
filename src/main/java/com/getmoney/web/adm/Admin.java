@@ -1,4 +1,4 @@
-package com.getmoney.web.brd;
+package com.getmoney.web.adm;
 
 import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class Article {
-	private String artseq, mid, brdtype, title, content;
+public class Admin {
+	private String aid, apw, aname, anum, arank, email, phonenum;
+	
 }

@@ -71,6 +71,7 @@ auth = (()=>{
         .addClass('text-center')
         .html(auth_vue.login_body())
     	 login()
+    	 access()
     }
     let join =()=>{
     	let data = {
@@ -152,6 +153,35 @@ auth = (()=>{
     				}
 	    	}
     	})
+    }
+    let access =()=>{
+    	$('#a_go_admin').click(()=>{
+    		let ok = confirm('사원입니까?')
+        	if(ok){
+        		let anum = prompt('사원번호를 입력하시오')
+        		$.ajax({
+        			url : _+'/admins/'+anum+'/acees',
+        			type : 'POST',
+        			data : JSON.stringify({anum : anum, apw : prompt('비밀번호를 입력하시오')}),
+        			dataType : 'json',
+        			contentType : 'application/json',
+        			success : d=>{
+        				alert('관리자 ajax 다녀옴')
+        				if(d.msg === 'SUCCESS'){
+        					alert('환영합니다')
+//        					admin.onCreate()
+        				}else{
+        					alert('접근권한이 없습니다.')
+//        					app.run()
+        				}
+        			},
+        			error : e=>{
+        				
+        			}
+        		})
+        	}
+    	})
+    	
     }
     return {onCreate, join, login}
 })();
