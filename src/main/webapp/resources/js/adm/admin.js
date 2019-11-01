@@ -75,29 +75,33 @@ admin = (()=>{
 		alert('고객관리')
 		$('<h4>고객 관리 페이지</h4>').appendTo('#right')
 	}
-	let webCrawl = ()=>{
-		$('<h4>WebCrawling</h4>'+
-			'<br><br>'+
-			'<form id="seho">'+
-			'<select name="cars" size="4" multiple>'+
-			'</select>'+
-			'<br><br>'+
-			'<input id="seho1" type="text" style="width:300px" onkeypress="if(event.keyCode==13){}" />'+
-			'</form>')
+	let webCrawl=()=>{
+		$('#right').empty()
+		$('</br></br></br></br></br><h2>Web Crawling</h2></br></br></br></br></br></br></br>'+
+				'<form id="crawl_form" class="form-inline my-2 my-lg-0">'+
+				'  <select name="site" size="1" multiple>'+
+				'  </select>'+
+		          '<input class="form-control mr-sm-2" type="text" placeholder="insert URL for crawling" aria-label="Search">'+
+				'</form>')
 		.appendTo('#right')
-		$.each(
-			[{name:"politics",url:"https://news.naver.com/main/main.nhn?mode=LSD&mid=shm&sid1=100",text:"정치"},
-			{name:"entertainment", url:"https://entertain.naver.com/home",text:"연예"},
-			{name:"economy", url:"https://news.naver.com/main/main.nhn?mode=LSD&mid=shm&sid1=101",text:"경제"},
-			{name:"it", url:"https://news.naver.com/main/main.nhn?mode=LSD&mid=shm&sid1=105",text:"IT"},
-			{name:"sports", url:"https://sports.news.naver.com/index.nhn",text:"스포츠"}],
-			(i,j)=>{
-			$('<option id"'+j.name+'">'+j.text+'</option>')
-				.appendTo('#seho select')
-				.click(()=>{
-					let that = $(this).attr('url')
-			})
+		$('#crawl_form input[class="form-control mr-sm-2"]')
+		.css({width:'80%'})
+		$.each([{sub:'naver.com'},{sub:'daum.net'},{sub:'google.co.kr'},{sub:'youtube.com'}],(i,j)=>{
+			$('<option value='+j.sub+'>'+j.sub+'</option>').appendTo('#crawl_form select')
 		})
+		$('<button class="btn btn-secondary my-2 my-sm-0" type="submit">go crawl</button>')
+		.appendTo('#crawl_form')
+		.click(e=>{
+			e.preventDefault()
+			let arr = [$('form#crawl_form select[name="site"]').val(),
+				$('form#crawl_form input[type="text"]').val()]
+			if(!$.fn.nullChecker(arr)){
+				$.getJSON(_+'/tx/crawling/'+arr[0]+'/'+arr[1],d=>{
+				alert(d.msg)
+			})
+			}
+		})
+		
 	}
 	return {onCreate}
 })()
