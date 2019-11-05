@@ -19,7 +19,7 @@ import lombok.Data;
 
 @Component @Data @Lazy
 public class Proxy {
-	private int pageNum, pageSize, startRow;
+	private int pageNum, pageSize, startRow, endRow, startPage, endPage;
 	private String search;
 	private final int BLOCK_SIZE = 5;
 	@Autowired Printer p;
@@ -28,9 +28,12 @@ public class Proxy {
 	public void paging() {
 		ISupplier<String> s = () -> articleMapper.countArticle();
 		int totalCount = Integer.parseInt(s.get());
-		int pageCount = 0;
-		pageCount = (totalCount%5 ==0)?(totalCount/5) : (totalCount/5)+1;
-		p.accept("페이지 카운터 테스트" +pageCount);
+		int pageCount = (totalCount % pageSize ==0)?(totalCount / pageSize) : (totalCount / pageSize)+1;
+		int blockCount = pageCount/5;
+		startRow = (pageNum-1)*pageSize;
+		endRow = (pageNum == pageCount) ? totalCount - 1 : startRow + pageSize - 1 ;
+		startPage = 0;
+		endPage = 0;
 		
 	}
 	
