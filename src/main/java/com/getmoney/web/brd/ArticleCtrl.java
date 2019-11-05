@@ -1,5 +1,6 @@
 package com.getmoney.web.brd;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.getmoney.web.cmm.IConsumer;
 import com.getmoney.web.cmm.IFunction;
+import com.getmoney.web.cmm.IPredicate;
 import com.getmoney.web.cmm.ISupplier;
+import com.getmoney.web.pxy.Proxy;
 import com.getmoney.web.utl.Printer;
 
 @RestController
@@ -27,11 +30,11 @@ public class ArticleCtrl {
 	@Autowired Article art;
 	@Autowired ArticleMapper articleMapper;
 	@Autowired List<Article> list; 
+	@Autowired Proxy pxy;
 	
 	@PostMapping("/")
 	public Map<?,?> write(@RequestBody Article param){
 		param.setBrdtype("게시판");
-		printer.accept("글쓰기 들어옴 : "+param.toString());
 		IConsumer<Article> c = t -> articleMapper.insertArticle(param);
 			c.accept(param);
 		map.clear();
@@ -40,16 +43,22 @@ public class ArticleCtrl {
 		map.put("count", s.get());
 		return map;
 	}
-	
-	@GetMapping("/")
-	public List<Article> list(){
+
+	@GetMapping("/page/{pageNo}/size/{pageSize}")
+	public Map<?,?> list(@PathVariable String pageNo,
+						@PathVariable String pageSize){
+		System.out.println("넘어온 페이지 넘버: "+pageNo);
+		pxy.setPageNum(Integer.parseInt(pageNo));
+		pxy.setPageSize(Integer.parseInt(pageSize));
+		pxy.paging();
 		list.clear();
-		ISupplier<List<Article>> s = ()-> articleMapper.selectAll();
-		printer.accept("리스트 나감 : \n"+s.get());
-		return s.get();
-	}
-	
-	
+		ISupplier<List<Article>> s =()-> articleMapper.selectAll(pxy);
+		printer.accept("해당 페이지 글목록 \n"+s.get());
+		map.clear();
+		map.put("articles",s.get());
+		map.put("pages",Arrays.asList(1,2,3,4,5));
+		return map;
+	}	
 	
 	@GetMapping("/count")
 	public Map<?,?> count(){

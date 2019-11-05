@@ -1,4 +1,4 @@
-package com.getmoney.web.aop;
+package com.getmoney.web.pxy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +11,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import com.getmoney.web.brd.ArticleMapper;
+import com.getmoney.web.cmm.ISupplier;
 import com.getmoney.web.utl.Printer;
 
 import lombok.Data;
 
-@Data @Component @Lazy
+@Component @Data @Lazy
 public class Proxy {
-	private int pageNum;
+	private int pageNum, pageSize, startRow;
 	private String search;
+	private final int BLOCK_SIZE = 5;
 	@Autowired Printer p;
-	// @Autowired List<String> proxyList;
+	@Autowired ArticleMapper articleMapper;
+	
+	public void paging() {
+		ISupplier<String> s = () -> articleMapper.countArticle();
+		int totalCount = Integer.parseInt(s.get());
+		int pageCount = 0;
+		pageCount = (totalCount%5 ==0)?(totalCount/5) : (totalCount/5)+1;
+		p.accept("페이지 카운터 테스트" +pageCount);
+		
+	}
 	
 	public List<?> crawl(Map<?,?> paramMap){
 		String url = "http://"+paramMap.get("site")+"/";
@@ -40,8 +52,6 @@ public class Proxy {
 		} catch (Exception e2) {
 			e2.printStackTrace();
 		}
-		
 		return proxyList;
 	}
-
 }

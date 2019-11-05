@@ -17,8 +17,13 @@
     	select count(*)
 		from article
     </select>
-    <select id="selectAll" resultType="Article">
-    	select * from article
+      <select id="selectAll" resultType="Article" parameterType="Proxy">
+       	SELECT A.BRDTYPE AS brdType, A.*
+   		FROM
+   		(SELECT * 
+   		FROM ARTICLE 
+   		ORDER BY ARTSEQ DESC) A
+   		LIMIT ${startRow}, ${pageSize}
     </select>
     <select id="selectMypage" resultType="Article">
     	select *
